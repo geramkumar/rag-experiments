@@ -1,0 +1,30 @@
+ssh-keygen -t ed25519 -C "geramkumar@gmail.com"
+git config --global user.name "Ramkumar Gopal"
+git config --global user.email "geramkumar@gmail.com"
+git config --global init.defaultBranch main
+git config --list
+git remote add origin https://github.com/geramkumar/rag-experiments.git
+
+uv venv --python 3.11
+source .venv/bin/activate
+
+-- understand the purpose of below commands
+add "onnxruntime>=1.17.3,<1.18" in .toml
+rm -rf .venv
+uv lock
+uv sync
+
+-- how to delete existing local git setup, delete files in remote repo and setup git from scratch 
+  rm -rf .git
+  git status
+  git init
+  git config --global user.name "Ramkumar Gopal"
+  git config --global user.email "geramkumar@gmail.com"
+  git config --global init.defaultBranch main
+  git remote add origin https://github.com/geramkumar/rag-experiments.git
+  git status
+  git add .
+  git commit -m "initial commit"
+  git push --force origin main ==> this will delete existing remote repo files and push from local.
+  
+  

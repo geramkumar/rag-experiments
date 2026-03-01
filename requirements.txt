@@ -1,0 +1,7 @@
+ipykernel
+langchain
+langchain-community
+langchain-chroma
+langchain-openai
+chromadb
+python-dotenv
