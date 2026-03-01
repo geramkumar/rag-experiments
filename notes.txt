@@ -27,4 +27,37 @@ uv sync
   git commit -m "initial commit"
   git push --force origin main ==> this will delete existing remote repo files and push from local.
   
-  
+## Sample script to Load data from list to Documents
+from langchain_core.documents import Document
+
+input_data = [
+    "Azure Databricks is a unified analytics platform built on Apache Spark.",
+    "Delta Lake provides ACID transactions and scalable metadata handling.",
+    "Medallion architecture consists of Bronze, Silver and Gold layers.",
+    "Chroma is a lightweight vector database for storing embeddings."
+]
+
+documents = [
+    Document(page_content=text, metadata={"source": f"doc_{i}"})
+    for i, text in enumerate(input_data)
+]
+
+#rag with and without lcel
+#rag with lcel
+
+from langchain_core.prompts import ChatPromptTemplate
+from langchain_core.runnables import RunnablePassthrough
+
+prompt = ChatPromptTemplate.from_template("""
+Answer based only on context:
+{context}
+
+Question: {question}
+""")
+
+rag_chain = (
+    {"context": retriever, "question": RunnablePassthrough()}
+    | prompt
+    | llm
+)
+
